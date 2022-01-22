@@ -24,17 +24,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="inputFieldValueChangedWithSender:" destination="BYZ-38-t0r" eventType="editingChanged" id="Ogu-Vb-Hej"/>
-                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PASSWORD" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="SqV-dL-waJ">
                                         <rect key="frame" x="0.0" y="54" width="374" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                        <connections>
-                                            <action selector="inputFieldValueChangedWithSender:" destination="BYZ-38-t0r" eventType="editingChanged" id="VTO-u4-u6x"/>
-                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>

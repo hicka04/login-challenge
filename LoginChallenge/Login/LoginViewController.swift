@@ -3,6 +3,8 @@ import Entities
 import APIServices
 import Logging
 import SwiftUI
+import Combine
+import CombineCocoa
 
 @MainActor
 final class LoginViewController: UIViewController {
@@ -12,16 +14,24 @@ final class LoginViewController: UIViewController {
     
     // String(reflecting:) はモジュール名付きの型名を取得するため。
     private let logger: Logger = .init(label: String(reflecting: LoginViewController.self))
+
+    private let viewModel: LoginViewModel = .init()
+
+    private var cancellables: Set<AnyCancellable> = []
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        idField.textPublisher.assign(to: &viewModel.$idString)
+        passwordField.textPublisher.assign(to: &viewModel.$passwordString)
+
+        viewModel.$isEnabledLoginButton.assign(to: \.isEnabled, on: loginButton).store(in: &cancellables)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         // VC を表示する前に View の状態のアップデートし、状態の不整合を防ぐ。
-        // loginButton は ID およびパスワードが空でない場合だけ有効。
-        loginButton.isEnabled = !(
-            idField.text?.isEmpty ?? true
-            || passwordField.text?.isEmpty ?? true
-        )
         idField.isEnabled = true
         passwordField.isEnabled = true
     }
@@ -142,14 +152,5 @@ final class LoginViewController: UIViewController {
                 await present(alertController, animated: true)
             }
         }
-    }
-    
-    // ID およびパスワードのテキストが変更されたときに View の状態を更新。
-    @IBAction private func inputFieldValueChanged(sender: UITextField) {
-        // loginButton は ID およびパスワードが空でない場合だけ有効。
-        loginButton.isEnabled = !(
-            idField.text?.isEmpty ?? true
-            || passwordField.text?.isEmpty ?? true
-        )
     }
 }
