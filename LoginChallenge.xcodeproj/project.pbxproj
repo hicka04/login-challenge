@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B82D0E58279C33DD000A09DC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82D0E57279C33DD000A09DC /* LoginViewModel.swift */; };
 		B82D0E5B279C37E6000A09DC /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = B82D0E5A279C37E6000A09DC /* CombineCocoa */; };
+		B82D0E5D279D3E0B000A09DC /* Combine.Publisher+asyncSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82D0E5C279D3E0B000A09DC /* Combine.Publisher+asyncSink.swift */; };
 		D6673300279ABE8C00CC8AB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66732FF279ABE8C00CC8AB3 /* AppDelegate.swift */; };
 		D6673302279ABE8C00CC8AB3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6673301279ABE8C00CC8AB3 /* SceneDelegate.swift */; };
 		D6673304279ABE8C00CC8AB3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6673303279ABE8C00CC8AB3 /* LoginViewController.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		B82D0E57279C33DD000A09DC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		B82D0E5C279D3E0B000A09DC /* Combine.Publisher+asyncSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine.Publisher+asyncSink.swift"; sourceTree = "<group>"; };
 		D66732FC279ABE8C00CC8AB3 /* LoginChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D66732FF279ABE8C00CC8AB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6673301279ABE8C00CC8AB3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				D6673349279BAAED00CC8AB3 /* ActivityIndicatorCoverModifier.swift */,
 				D667333C279ACF4300CC8AB3 /* ActivityIndicatorViewController.swift */,
 				D667333E279AD1E400CC8AB3 /* UIViewController+TransitionAsync.swift */,
+				B82D0E5C279D3E0B000A09DC /* Combine.Publisher+asyncSink.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				D6673304279ABE8C00CC8AB3 /* LoginViewController.swift in Sources */,
 				D6673348279BA6AC00CC8AB3 /* HomeView.swift in Sources */,
 				D6673300279ABE8C00CC8AB3 /* AppDelegate.swift in Sources */,
+				B82D0E5D279D3E0B000A09DC /* Combine.Publisher+asyncSink.swift in Sources */,
 				D667333D279ACF4300CC8AB3 /* ActivityIndicatorViewController.swift in Sources */,
 				D6673302279ABE8C00CC8AB3 /* SceneDelegate.swift in Sources */,
 				D667333F279AD1E400CC8AB3 /* UIViewController+TransitionAsync.swift in Sources */,

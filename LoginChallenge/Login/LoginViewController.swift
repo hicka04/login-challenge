@@ -29,59 +29,59 @@ final class LoginViewController: UIViewController {
         viewModel.$isEnabledIdFeild.assign(to: \.isEnabled, on: idField).store(in: &cancellables)
         viewModel.$isEnabledPasswordFeild.assign(to: \.isEnabled, on: passwordField).store(in: &cancellables)
 
-        viewModel.$loginState.sink { loginState in
+        viewModel.$loginState.asyncSink { loginState in
             switch loginState {
             case .loggingOut(let error):
                 guard let error = error else {
                     return
                 }
 
-                self.dismiss(animated: true) {
-                    let title: String
-                    let message: String
-                    switch error {
-                    case is LoginError:
-                        title = "ログインエラー"
-                        message = "IDまたはパスワードが正しくありません。"
+                await self.dismiss(animated: true)
 
-                    case is NetworkError:
-                        title = "ネットワークエラー"
-                        message = "通信に失敗しました。ネットワークの状態を確認して下さい。"
+                let title: String
+                let message: String
+                switch error {
+                case is LoginError:
+                    title = "ログインエラー"
+                    message = "IDまたはパスワードが正しくありません。"
 
-                    case is ServerError:
-                        title = "サーバーエラー"
-                        message = "しばらくしてからもう一度お試し下さい。"
+                case is NetworkError:
+                    title = "ネットワークエラー"
+                    message = "通信に失敗しました。ネットワークの状態を確認して下さい。"
 
-                    default:
-                        title = "システムエラー"
-                        message = "エラーが発生しました。"
-                    }
-                    let alertController: UIAlertController = .init(
-                        title: title,
-                        message: message,
-                        preferredStyle: .alert
-                    )
-                    alertController.addAction(.init(title: "閉じる", style: .default, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
+                case is ServerError:
+                    title = "サーバーエラー"
+                    message = "しばらくしてからもう一度お試し下さい。"
+
+                default:
+                    title = "システムエラー"
+                    message = "エラーが発生しました。"
                 }
+                let alertController: UIAlertController = .init(
+                    title: title,
+                    message: message,
+                    preferredStyle: .alert
+                )
+                alertController.addAction(.init(title: "閉じる", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
 
             case .loginProccessing:
                 // Activity Indicator を表示。
                 let activityIndicatorViewController: ActivityIndicatorViewController = .init()
                 activityIndicatorViewController.modalPresentationStyle = .overFullScreen
                 activityIndicatorViewController.modalTransitionStyle = .crossDissolve
-                self.present(activityIndicatorViewController, animated: true, completion: nil)
+                await self.present(activityIndicatorViewController, animated: true)
 
             case .loggedIn:
-                self.dismiss(animated: true) {
-                    // HomeView に遷移。
-                    let destination = UIHostingController(rootView: HomeView(dismiss: { [weak self] in
-                        await self?.dismiss(animated: true)
-                    }))
-                    destination.modalPresentationStyle = .fullScreen
-                    destination.modalTransitionStyle = .flipHorizontal
-                    self.present(destination, animated: true, completion: nil)
-                }
+                await self.dismiss(animated: true)
+                
+                // HomeView に遷移。
+                let destination = UIHostingController(rootView: HomeView(dismiss: { [weak self] in
+                    await self?.dismiss(animated: true)
+                }))
+                destination.modalPresentationStyle = .fullScreen
+                destination.modalTransitionStyle = .flipHorizontal
+                self.present(destination, animated: true, completion: nil)
             }
         }.store(in: &cancellables)
     }
