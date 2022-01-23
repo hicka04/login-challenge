@@ -11,9 +11,6 @@ final class LoginViewController: UIViewController {
     @IBOutlet private var idField: UITextField!
     @IBOutlet private var passwordField: UITextField!
     @IBOutlet private var loginButton: UIButton!
-    
-    // String(reflecting:) はモジュール名付きの型名を取得するため。
-    private let logger: Logger = .init(label: String(reflecting: LoginViewController.self))
 
     private let viewModel: LoginViewModel = .init()
 
