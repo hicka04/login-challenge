@@ -29,7 +29,7 @@ final class LoginViewController: UIViewController {
         viewModel.$isEnabledIdFeild.assign(to: \.isEnabled, on: idField).store(in: &cancellables)
         viewModel.$isEnabledPasswordFeild.assign(to: \.isEnabled, on: passwordField).store(in: &cancellables)
 
-        viewModel.$loginState.asyncSink { loginState in
+        viewModel.$loginState.asyncSink { @MainActor loginState in
             switch loginState {
             case .loggingOut(let error):
                 guard let error = error else {
@@ -51,7 +51,7 @@ final class LoginViewController: UIViewController {
 
             case .loggedIn:
                 await self.dismiss(animated: true)
-                
+
                 // HomeView に遷移。
                 let destination = UIHostingController(rootView: HomeView(dismiss: { [weak self] in
                     await self?.dismiss(animated: true)

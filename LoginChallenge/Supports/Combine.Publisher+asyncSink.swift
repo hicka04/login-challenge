@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-extension Publisher where Failure == Never {
-    func asyncSink(receiveValue: @escaping (Output) async -> Void) -> AnyCancellable {
+extension Publisher where Output: Sendable, Failure == Never {
+    func asyncSink(receiveValue: @Sendable @escaping (Output) async -> Void) -> AnyCancellable {
         self.sink { output in
             Task {
                 await receiveValue(output)
