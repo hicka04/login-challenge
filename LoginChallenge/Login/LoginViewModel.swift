@@ -12,16 +12,39 @@ import APIServices
 import Logging
 
 enum LoginState {
-    case loggingOut
+    case loggingOut(Error?)
     case loginProccessing
     case loggedIn
-    case loginError(Error)
 
     var isLoginProcessing: Bool {
         switch self {
         case .loginProccessing: return true
         default: return false
         }
+    }
+
+    mutating func updateStateIfNeeded(_ newState: Self) {
+        switch (current: self, new: newState) {
+        case (.loggingOut(nil), .loggingOut(nil)):
+            return
+
+        case (.loggingOut, .loginProccessing):
+            break
+
+        case (.loginProccessing, .loggedIn):
+            break
+
+        case (.loginProccessing, .loggingOut(let error)) where error != nil:
+            break
+
+        case (.loggedIn, .loggingOut(nil)):
+            break
+
+        default:
+            assertionFailure()
+        }
+
+        self = newState
     }
 }
 
@@ -32,7 +55,7 @@ final class LoginViewModel: ObservableObject {
     @Published private(set) var isEnabledLoginButton: Bool = false
     @Published private(set) var isEnabledIdFeild: Bool = true
     @Published private(set) var isEnabledPasswordFeild: Bool = true
-    @Published private(set) var loginState: LoginState = .loggingOut
+    @Published private(set) var loginState: LoginState = .loggingOut(nil)
 
     private let logger: Logger = .init(label: String(reflecting: LoginViewModel.self))
 
@@ -51,7 +74,7 @@ final class LoginViewModel: ObservableObject {
     }
 
     func viewWillAppear() {
-        loginState = .loggingOut
+        loginState.updateStateIfNeeded(.loggingOut(nil))
     }
 
     func loginButtonPressed() {
@@ -59,7 +82,7 @@ final class LoginViewModel: ObservableObject {
             return
         }
 
-        loginState = .loginProccessing
+        loginState.updateStateIfNeeded(.loginProccessing)
 
         Task {
             do {
@@ -70,7 +93,7 @@ final class LoginViewModel: ObservableObject {
             } catch {
                 logger.info("\(error)")
 
-                loginState = .loginError(error)
+                loginState.updateStateIfNeeded(.loggingOut(error))
             }
         }
     }

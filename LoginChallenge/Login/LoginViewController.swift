@@ -31,28 +31,11 @@ final class LoginViewController: UIViewController {
 
         viewModel.$loginState.sink { loginState in
             switch loginState {
-            case .loggingOut:
-                break
-
-            case .loginProccessing:
-                // Activity Indicator を表示。
-                let activityIndicatorViewController: ActivityIndicatorViewController = .init()
-                activityIndicatorViewController.modalPresentationStyle = .overFullScreen
-                activityIndicatorViewController.modalTransitionStyle = .crossDissolve
-                self.present(activityIndicatorViewController, animated: true, completion: nil)
-
-            case .loggedIn:
-                self.dismiss(animated: true) {
-                    // HomeView に遷移。
-                    let destination = UIHostingController(rootView: HomeView(dismiss: { [weak self] in
-                        await self?.dismiss(animated: true)
-                    }))
-                    destination.modalPresentationStyle = .fullScreen
-                    destination.modalTransitionStyle = .flipHorizontal
-                    self.present(destination, animated: true, completion: nil)
+            case .loggingOut(let error):
+                guard let error = error else {
+                    return
                 }
 
-            case .loginError(let error):
                 self.dismiss(animated: true) {
                     let title: String
                     let message: String
@@ -80,6 +63,24 @@ final class LoginViewController: UIViewController {
                     )
                     alertController.addAction(.init(title: "閉じる", style: .default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
+                }
+
+            case .loginProccessing:
+                // Activity Indicator を表示。
+                let activityIndicatorViewController: ActivityIndicatorViewController = .init()
+                activityIndicatorViewController.modalPresentationStyle = .overFullScreen
+                activityIndicatorViewController.modalTransitionStyle = .crossDissolve
+                self.present(activityIndicatorViewController, animated: true, completion: nil)
+
+            case .loggedIn:
+                self.dismiss(animated: true) {
+                    // HomeView に遷移。
+                    let destination = UIHostingController(rootView: HomeView(dismiss: { [weak self] in
+                        await self?.dismiss(animated: true)
+                    }))
+                    destination.modalPresentationStyle = .fullScreen
+                    destination.modalTransitionStyle = .flipHorizontal
+                    self.present(destination, animated: true, completion: nil)
                 }
             }
         }.store(in: &cancellables)
