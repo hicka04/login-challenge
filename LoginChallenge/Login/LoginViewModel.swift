@@ -12,7 +12,7 @@ import APIServices
 import Logging
 
 enum LoginState {
-    case loggingOut(Error?)
+    case loggingOut(LocalizedError?)
     case loginProccessing
     case loggedIn
 
@@ -90,10 +90,13 @@ final class LoginViewModel: ObservableObject {
                 try await AuthService.logInWith(id: idString!, password: passwordString!)
 
                 loginState = .loggedIn
+            } catch let error as LocalizedError {
+                logger.info("\(error)")
+                loginState.updateStateIfNeeded(.loggingOut(error))
             } catch {
                 logger.info("\(error)")
-
-                loginState.updateStateIfNeeded(.loggingOut(error))
+                let localizedError = GeneralError(message: error.localizedDescription, cause: error)
+                loginState.updateStateIfNeeded(.loggingOut(localizedError))
             }
         }
     }

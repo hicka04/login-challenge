@@ -38,32 +38,9 @@ final class LoginViewController: UIViewController {
 
                 await self.dismiss(animated: true)
 
-                let title: String
-                let message: String
-                switch error {
-                case is LoginError:
-                    title = "ログインエラー"
-                    message = "IDまたはパスワードが正しくありません。"
-
-                case is NetworkError:
-                    title = "ネットワークエラー"
-                    message = "通信に失敗しました。ネットワークの状態を確認して下さい。"
-
-                case is ServerError:
-                    title = "サーバーエラー"
-                    message = "しばらくしてからもう一度お試し下さい。"
-
-                default:
-                    title = "システムエラー"
-                    message = "エラーが発生しました。"
-                }
-                let alertController: UIAlertController = .init(
-                    title: title,
-                    message: message,
-                    preferredStyle: .alert
-                )
+                let alertController: UIAlertController = .init(localizedError: error)
                 alertController.addAction(.init(title: "閉じる", style: .default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
+                await self.present(alertController, animated: true)
 
             case .loginProccessing:
                 // Activity Indicator を表示。
@@ -81,7 +58,7 @@ final class LoginViewController: UIViewController {
                 }))
                 destination.modalPresentationStyle = .fullScreen
                 destination.modalTransitionStyle = .flipHorizontal
-                self.present(destination, animated: true, completion: nil)
+                await self.present(destination, animated: true)
             }
         }.store(in: &cancellables)
     }
