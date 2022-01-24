@@ -101,6 +101,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B8113C7F279ECD370038FEFB /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D6673347279BA6AC00CC8AB3 /* HomeView.swift */,
+				D6673345279B07F400CC8AB3 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B8113C80279ECD460038FEFB /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				D6673305279ABE8C00CC8AB3 /* Main.storyboard */,
+				B8113C7F279ECD370038FEFB /* Home */,
+				B82D0E56279C33C7000A09DC /* Login */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		B8113C81279ECD610038FEFB /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				B8113C82279ECDA50038FEFB /* Delegate */,
+				D667330A279ABE8F00CC8AB3 /* LaunchScreen.storyboard */,
+				D667330D279ABE8F00CC8AB3 /* Info.plist */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		B8113C82279ECDA50038FEFB /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				D66732FF279ABE8C00CC8AB3 /* AppDelegate.swift */,
+				D6673301279ABE8C00CC8AB3 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		B8113C83279ECDB30038FEFB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D6673308279ABE8F00CC8AB3 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		B82D0E56279C33C7000A09DC /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,16 +181,10 @@
 		D66732FE279ABE8C00CC8AB3 /* LoginChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				B82D0E56279C33C7000A09DC /* Login */,
-				D66732FF279ABE8C00CC8AB3 /* AppDelegate.swift */,
-				D6673301279ABE8C00CC8AB3 /* SceneDelegate.swift */,
-				D6673347279BA6AC00CC8AB3 /* HomeView.swift */,
-				D6673345279B07F400CC8AB3 /* HomeViewController.swift */,
+				B8113C81279ECD610038FEFB /* Application */,
+				B8113C80279ECD460038FEFB /* Scenes */,
 				D6673344279B06F000CC8AB3 /* Supports */,
-				D6673305279ABE8C00CC8AB3 /* Main.storyboard */,
-				D6673308279ABE8F00CC8AB3 /* Assets.xcassets */,
-				D667330A279ABE8F00CC8AB3 /* LaunchScreen.storyboard */,
-				D667330D279ABE8F00CC8AB3 /* Info.plist */,
+				B8113C83279ECDB30038FEFB /* Resources */,
 			);
 			path = LoginChallenge;
 			sourceTree = "<group>";
@@ -519,7 +559,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AQ3JC8F3HL;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LoginChallenge/Info.plist;
+				INFOPLIST_FILE = LoginChallenge/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -547,7 +587,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AQ3JC8F3HL;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LoginChallenge/Info.plist;
+				INFOPLIST_FILE = LoginChallenge/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
