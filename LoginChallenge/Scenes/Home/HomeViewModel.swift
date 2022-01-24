@@ -20,6 +20,9 @@ final class HomeViewModel: ObservableObject {
     @Published var presentsServerErrorAlert: Bool = false
     @Published var presentsSystemErrorAlert: Bool = false
 
+    @Published private(set) var isLoggingOut: Bool = false
+    @Published private(set) var presentsActivityIndocator: Bool = false
+
     private let logger: Logger = .init(label: String(reflecting: HomeViewModel.self))
 
     func onAppear() {
@@ -31,6 +34,27 @@ final class HomeViewModel: ObservableObject {
     func reloadButtonTapped() {
         Task { [weak self] in
             await self?.loadUser()
+        }
+    }
+
+    func logoutButtonTapped(onLoggedOut: @escaping () -> Void) {
+        Task {
+            // 処理が二重に実行されるのを防ぐ。
+            if isLoggingOut { return }
+
+            // 処理中はログアウトボタン押下を受け付けない。
+            isLoggingOut = false
+
+            // Activity Indicator を表示。
+            presentsActivityIndocator = true
+
+            // API を叩いて処理を実行。
+            await AuthService.logOut()
+
+            // Activity Indicator を非表示に。
+            presentsActivityIndocator = false
+
+            onLoggedOut()
         }
     }
 

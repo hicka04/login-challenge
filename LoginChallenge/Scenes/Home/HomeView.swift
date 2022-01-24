@@ -9,10 +9,6 @@ private let logger: Logger = .init(label: String(reflecting: HomeView.self))
 @MainActor
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
-
-    @State private var isLoggingOut: Bool = false
-    
-    @State private var presentsActivityIndocator: Bool = false
     
     let dismiss: () async -> Void
     
@@ -60,30 +56,13 @@ struct HomeView: View {
                 
                 // ログアウトボタン
                 Button("Logout") {
-                    Task {
-                        // 処理が二重に実行されるのを防ぐ。
-                        if isLoggingOut { return }
-                        
-                        // 処理中はログアウトボタン押下を受け付けない。
-                        isLoggingOut = false
-                        
-                        // Activity Indicator を表示。
-                        presentsActivityIndocator = true
-                        
-                        // API を叩いて処理を実行。
-                        await AuthService.logOut()
-                        
-                        // Activity Indicator を非表示に。
-                        presentsActivityIndocator = false
-                        
-                        // LoginViewController に遷移。
-                        await dismiss()
-                        
-                        // この View から遷移するのでボタンの押下受け付けは再開しない。
-                        // 遷移アニメーション中に処理が実行されることを防ぐ。
+                    viewModel.logoutButtonTapped {
+                        Task {
+                            await dismiss()
+                        }
                     }
                 }
-                .disabled(isLoggingOut)
+                .disabled(viewModel.isLoggingOut)
                 .padding(.bottom, 30)
             }
         }
@@ -118,7 +97,7 @@ struct HomeView: View {
             actions: { Text("閉じる") },
             message: { Text("エラーが発生しました。") }
         )
-        .activityIndicatorCover(isPresented: presentsActivityIndocator)
+        .activityIndicatorCover(isPresented: viewModel.presentsActivityIndocator)
         .onAppear {
             viewModel.onAppear()
         }
