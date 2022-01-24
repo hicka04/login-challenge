@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B8113C85279ECF380038FEFB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8113C84279ECF380038FEFB /* HomeViewModel.swift */; };
 		B82D0E58279C33DD000A09DC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82D0E57279C33DD000A09DC /* LoginViewModel.swift */; };
 		B82D0E5B279C37E6000A09DC /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = B82D0E5A279C37E6000A09DC /* CombineCocoa */; };
 		B82D0E5D279D3E0B000A09DC /* Combine.Publisher+asyncSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82D0E5C279D3E0B000A09DC /* Combine.Publisher+asyncSink.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B8113C84279ECF380038FEFB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B82D0E57279C33DD000A09DC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B82D0E5C279D3E0B000A09DC /* Combine.Publisher+asyncSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine.Publisher+asyncSink.swift"; sourceTree = "<group>"; };
 		B82D0E5E279D8573000A09DC /* UIAlertController+LocalizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+LocalizedError.swift"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			children = (
 				D6673347279BA6AC00CC8AB3 /* HomeView.swift */,
 				D6673345279B07F400CC8AB3 /* HomeViewController.swift */,
+				B8113C84279ECF380038FEFB /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				B82D0E5D279D3E0B000A09DC /* Combine.Publisher+asyncSink.swift in Sources */,
 				D667333D279ACF4300CC8AB3 /* ActivityIndicatorViewController.swift in Sources */,
 				D6673302279ABE8C00CC8AB3 /* SceneDelegate.swift in Sources */,
+				B8113C85279ECF380038FEFB /* HomeViewModel.swift in Sources */,
 				D667333F279AD1E400CC8AB3 /* UIViewController+TransitionAsync.swift in Sources */,
 				D6673346279B07F400CC8AB3 /* HomeViewController.swift in Sources */,
 				D667334A279BAAED00CC8AB3 /* ActivityIndicatorCoverModifier.swift in Sources */,
